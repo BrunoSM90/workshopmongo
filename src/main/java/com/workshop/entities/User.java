@@ -18,7 +18,7 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	
-	@DBRef(lazy = false)
+//	@DBRef(lazy = true)
 	private List<Post> posts = new ArrayList<>();
 	
 	public User() {
@@ -56,7 +56,6 @@ public class User implements Serializable {
 	}
 	
 	public List<Post> getPosts() {
-		System.out.println(posts);
 		return posts;
 	}
 	
