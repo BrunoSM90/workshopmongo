@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.workshop.entities.Post;
 import com.workshop.entities.User;
+import com.workshop.entities.dto.AuthorDTO;
 import com.workshop.repositories.PostRepository;
 import com.workshop.repositories.UserRepository;
 
@@ -31,11 +32,18 @@ public class DBInstantiation implements CommandLineRunner{
 		
 		userRepo.saveAll(Arrays.asList(john, maria, alex));
 		
-		Post p1 = new Post(null, Instant.now(), "Viagem para Mendoza", "foi muito legal", john);
-		Post p2 = new Post(null, Instant.now(), "Prainha no sábado", "calorao af", maria);
-		Post p3 = new Post(null, Instant.now(), "Jantarzinho com mozão", "yummy tummy", john);
+		Post p1 = new Post(null, Instant.now(), "Viagem para Mendoza", "foi muito legal",
+				new AuthorDTO(john));
+		Post p2 = new Post(null, Instant.now(), "Prainha no sábado", "calorao af",
+				new AuthorDTO(maria));
+		Post p3 = new Post(null, Instant.now(), "Jantarzinho com mozão", "yummy tummy",
+				new AuthorDTO(john));
 		
 		postRepo.saveAll(Arrays.asList(p1, p2, p3));
+		
+		john.addPost(p1);
+		john.addPost(p3);
+		userRepo.save(john);
 	}
 
 }
