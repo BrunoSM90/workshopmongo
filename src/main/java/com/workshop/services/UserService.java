@@ -41,4 +41,18 @@ public class UserService {
 		
 		repo.delete(user);
 	}
+	
+	public User update(User obj, String id) {
+		User user = findById(id);
+		if (user == null) {
+			throw new ObjectNotFoundException("Object not found.");
+		}
+		updateData(user, obj);
+		return repo.save(user);
+	}
+	
+	public void updateData(User user, User obj) {
+		user.setName(obj.getName());
+		user.setEmail(obj.getEmail());
+	}
 }
